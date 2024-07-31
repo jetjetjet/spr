@@ -412,10 +412,8 @@
                     success: function(item) {
                         mapCardTomat(item.tomat.card)
                         mapCardCabai(item.cabai.card)
-                        // refreshTomatTable(item.tomat.collection)
-                        setTimeout(() => {
-                            refreshCabaiTable(item.cabai.collection)
-                        }, 1000);
+                        refreshTomatTable(item.tomat.collection)
+                        refreshCabaiTable(item.cabai.collection)
                     },
                     error: function(err) {
                         refreshTomatTable([])
