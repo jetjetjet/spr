@@ -86,8 +86,7 @@ class Utils
             }
 
         } catch (\Throwable $th) {
-            dd($th);
-
+            //
         }
         
         return [];

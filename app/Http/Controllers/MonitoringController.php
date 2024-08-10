@@ -103,7 +103,7 @@ class MonitoringController extends Controller
                         return [
                             'counter' => $temp_data->counter,
                             'time' => $time,
-                            'humidity_soil' => $temp_data->humidity_soil,
+                            'humidity_soil_lora' => $temp_data->humidity_soil,
                             'status_valve' => $temp_data->status_valve,
                             'rssi' => $temp_data->rssi,
                             'snr' => $temp_data->snr ?? null,
@@ -114,17 +114,34 @@ class MonitoringController extends Controller
             })->filter();
 
             $data_cabai = [];
-            foreach ($data_shakira as $item) {
-                $data_first = $data_prama->where('time', '<=', $item['time'])->first();
-                $data_cabai[] = [
-                    'time' => $item['time'] ?? '-',
-                    'humidity_soil' => $item['humidity_soil'] ?? '-',
-                    'ph_soil' => $item['ph_soil'] ?? '-',
-                    'lux' => $item['lux'] ?? '-',
-                    'status_valve' => $data_first['status_valve'] ?? '-',
-                    'rssi' => $data_first['rssi'] ?? '-',
-                    'dbm' => $item['dbm'] ?? '-',
-                ];
+            if($data_shakira->count() > 0) {
+                foreach ($data_shakira as $item) {
+                    $data_first = $data_prama->where('time', '<=', $item['time'])->first();
+                    $data_cabai[] = [
+                        'time' => $item['time'] ?? '-',
+                        'humidity_soil' => $item['humidity_soil'] ?? '-',
+                        'humidity_soil_lora' => $data_prama['humidity_soil_lora'] ?? '-',
+                        'ph_soil' => $item['ph_soil'] ?? '-',
+                        'lux' => $item['lux'] ?? '-',
+                        'status_valve' => $data_first['status_valve'] ?? '-',
+                        'rssi' => $data_first['rssi'] ?? '-',
+                        'dbm' => $item['dbm'] ?? '-',
+                    ];
+                }
+            } elseif($data_prama->count() > 0) {
+                foreach ($data_prama as $item) {
+                    $data_first = $data_shakira->where('time', '<=', $item['time'])->first();
+                    $data_cabai[] = [
+                        'time' => $item['time'] ?? '-',
+                        'humidity_soil' => $data_first['humidity_soil'] ?? '-',
+                        'humidity_soil_lora' => $item['humidity_soil_lora'] ?? '-',
+                        'ph_soil' => $data_first['ph_soil'] ?? '-',
+                        'lux' => $data_first['lux'] ?? '-',
+                        'status_valve' => $item['status_valve'] ?? '-',
+                        'rssi' => $item['rssi'] ?? '-',
+                        'dbm' => $item['dbm'] ?? '-',
+                    ];
+                }
             }
             
             $data_tomat = [];

@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <select id="plant_type" class="form-select mb-3">
-                    <option value="cabai">Cabai</option>
+                    <option value="cabai">Daun Bawang</option>
                     <option value="tomat">Tomat</option>
                 </select>
 
@@ -273,7 +273,8 @@
                                 <thead>
                                     <tr>
                                         <th>Time</th>
-                                        <th>Kelembaban</th>
+                                        <th>Kelembaban RF</th>
+                                        <th>Kelembaban LoRa</th>
                                         <th>pH</th>
                                         <th>Intensitas Cahaya</th>
                                         <th>Valve</th>
@@ -325,6 +326,10 @@
                     {
                         data: 'humidity_soil',
                         name: 'humidity_soil',
+                    },
+                    {
+                        data: 'humidity_soil_lora',
+                        name: 'humidity_soil_lora',
                     },
                     {
                         data: 'ph_soil',
@@ -379,6 +384,7 @@
             let flatpickr = $("#selected_date").flatpickr(
                 {
                     inline: true,
+                    maxDate: "today",
                     onChange: function(dateObj, dateStr) {
                         getData(dateStr)
                     }
@@ -456,8 +462,8 @@
                     $('#cabai_rssi').html(cards.rssi + " dbm")
                     $('#cabai_status_valve').html(cards.status_valve ? 'Aktif' : 'Tidak Aktif')
                     $('#cabai_ph_soil').html(cards.ph_soil)
-                    $('#cabai_lora').html(cards.ph_soil)
-                    $('.cabai_lora_progress').css('width', cards.ph_soil + '%')
+                    $('#cabai_lora').html(cards.humidity_soil_lora)
+                    $('.cabai_lora_progress').css('width', cards.humidity_soil_lora + '%')
                     $('.cabai_humidity_soil_progress').css('width', cards.humidity_soil + '%')
 
                     if (cards.ph_soil < 7) {
