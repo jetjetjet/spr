@@ -168,7 +168,7 @@
                                                 l-7.152,147.152L236.84,350.536L236.84,350.536z"/>
                                         </svg>
                                         <div class="mx-2">
-                                            pH dibawah 7
+                                            pH dibawah 6
                                         </div>
                                     </div>
                                 </div>
@@ -468,7 +468,7 @@
                     $('.cabai_lora_progress').css('width', cards.humidity_soil_lora + '%')
                     $('.cabai_humidity_soil_progress').css('width', cards.humidity_soil + '%')
 
-                    if (cards.ph_soil < 7) {
+                    if (cards.ph_soil < 6) {
                         $('#cabai_alert').removeClass('d-none')
                     } else {
                         $('#cabai_alert').addClass('d-none')

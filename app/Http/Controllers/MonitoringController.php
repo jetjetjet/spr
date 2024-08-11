@@ -163,7 +163,7 @@ class MonitoringController extends Controller
                             'statusCuaca' => $temp_data->statusCuaca ?? '-',
                             'DataPH' => $temp_data->ph ?? '-',
                             'DataSensor1' => $temp_data->DataSensor1 ?? '-',
-                            'DataTDS' => $temp_data->tds ?? '-',
+                            'DataTDS' => $temp_data->tds * 10 ?? '-',
                             'DataSensor2' => $temp_data->DataSensor2 ?? '-',
                             'dbm' => $temp_data->dbm ?? '-',
                         ];
