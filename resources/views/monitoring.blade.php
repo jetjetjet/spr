@@ -444,6 +444,7 @@
                     $('#tomat_tds').html(cards.DataTDS)
                     $('#tomat_rssi').html(cards.rssi)
                     $('#tomat_status_valve').html(cards.status_valve)
+                    $('#tomat_temperature').html(cards.temperature)
                 } else {
                     $('#tomat_humidity').html("-")
                     $('#tomat_lux').html("-")
@@ -451,6 +452,7 @@
                     $('#tomat_rssi').html("-")
                     $('#tomat_status_valve').html("-")
                     $('#tomat_tds').html("-")
+                    $('#tomat_temperature').html("-")
                 }
             }
 
