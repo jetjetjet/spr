@@ -161,7 +161,7 @@ class MonitoringController extends Controller
                             'humidity' => $temp_data->humidity,
                             'lux' => $temp_data->lux ?? '-',
                             'statusCuaca' => $temp_data->statusCuaca ?? '-',
-                            'DataPH' => $temp_data->DataPH ?? '-',
+                            'DataPH' => $temp_data->ph ?? '-',
                             'DataSensor1' => $temp_data->DataSensor1 ?? '-',
                             'DataTDS' => $temp_data->tds ?? '-',
                             'DataSensor2' => $temp_data->DataSensor2 ?? '-',

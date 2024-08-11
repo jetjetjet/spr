@@ -440,7 +440,7 @@
                 if (cards != null) {
                     $('#tomat_humidity').html(cards.humidity)
                     $('#tomat_lux').html(cards.lux)
-                    $('#tomat_ph_soil').html(cards.ph_soil)
+                    $('#tomat_ph_soil').html(cards.DataPH)
                     $('#tomat_tds').html(cards.DataTDS)
                     $('#tomat_rssi').html(cards.rssi)
                     $('#tomat_status_valve').html(cards.status_valve)
