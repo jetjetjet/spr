@@ -441,16 +441,16 @@
                     $('#tomat_humidity').html(cards.humidity)
                     $('#tomat_lux').html(cards.lux)
                     $('#tomat_ph_soil').html(cards.ph_soil)
+                    $('#tomat_tds').html(cards.DataTDS)
                     $('#tomat_rssi').html(cards.rssi)
                     $('#tomat_status_valve').html(cards.status_valve)
-                    $('#tomat_ph_soil').html(cards.ph_soil)
                 } else {
                     $('#tomat_humidity').html("-")
                     $('#tomat_lux').html("-")
                     $('#tomat_ph_soil').html("-")
                     $('#tomat_rssi').html("-")
                     $('#tomat_status_valve').html("-")
-                    $('#tomat_ph_soil').html("-")
+                    $('#tomat_tds').html("-")
                 }
             }
 

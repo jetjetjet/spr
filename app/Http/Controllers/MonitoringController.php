@@ -163,7 +163,7 @@ class MonitoringController extends Controller
                             'statusCuaca' => $temp_data->statusCuaca ?? '-',
                             'DataPH' => $temp_data->DataPH ?? '-',
                             'DataSensor1' => $temp_data->DataSensor1 ?? '-',
-                            'DataTDS' => $temp_data->DataTDS ?? '-',
+                            'DataTDS' => $temp_data->tds ?? '-',
                             'DataSensor2' => $temp_data->DataSensor2 ?? '-',
                             'dbm' => $temp_data->dbm ?? '-',
                         ];
@@ -171,6 +171,8 @@ class MonitoringController extends Controller
                 }
             }
 
+            $data_tomat = collect($data_tomat)->sortByDesc('time')->all();
+            $data_cabai = collect($data_cabai)->sortByDesc('time')->all();
             $results = [
                 'cabai' => [
                     'card' => $data_cabai[0] ?? [],
