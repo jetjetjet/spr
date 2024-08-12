@@ -120,7 +120,7 @@ class MonitoringController extends Controller
                     $data_cabai[] = [
                         'time' => $item['time'] ?? '-',
                         'humidity_soil' => $item['humidity_soil'] ?? '-',
-                        'humidity_soil_lora' => $data_prama['humidity_soil_lora'] ?? '-',
+                        'humidity_soil_lora' => $data_first['humidity_soil_lora'] ?? '-',
                         'ph_soil' => $item['ph_soil'] ?? '-',
                         'lux' => $item['lux'] ?? '-',
                         'status_valve' => $data_first['status_valve'] ?? '-',
