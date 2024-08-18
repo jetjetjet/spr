@@ -273,6 +273,7 @@
                                 <thead>
                                     <tr>
                                         <th>Time</th>
+                                        <th>Counter</th>
                                         <th>Kelembaban RF</th>
                                         <th>Kelembaban LoRa</th>
                                         <th>pH</th>
@@ -324,6 +325,10 @@
                         name: 'time',
                     },
                     {
+                        data: 'counter',
+                        name: 'counter',
+                    },
+                    {
                         data: 'humidity_soil',
                         name: 'humidity_soil',
                     },
@@ -355,6 +360,10 @@
                         data: 'time',
                         name: 'time',
                     },
+                    // {
+                    //     data: 'counter',
+                    //     name: 'counter',
+                    // },
                     {
                         data: 'temperature',
                         name: 'temperature',

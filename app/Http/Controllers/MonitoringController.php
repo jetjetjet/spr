@@ -118,6 +118,7 @@ class MonitoringController extends Controller
                 foreach ($data_shakira as $item) {
                     $data_first = $data_prama->where('time', '<=', $item['time'])->first();
                     $data_cabai[] = [
+                        'counter' => $item['counter'] ?? '-',
                         'time' => $item['time'] ?? '-',
                         'humidity_soil' => $item['humidity_soil'] ?? '-',
                         'humidity_soil_lora' => $data_first['humidity_soil_lora'] ?? '-',
@@ -132,6 +133,7 @@ class MonitoringController extends Controller
                 foreach ($data_prama as $item) {
                     $data_first = $data_shakira->where('time', '<=', $item['time'])->first();
                     $data_cabai[] = [
+                        'counter' => $item['counter'] ?? '-',
                         'time' => $item['time'] ?? '-',
                         'humidity_soil' => $data_first['humidity_soil'] ?? '-',
                         'humidity_soil_lora' => $item['humidity_soil_lora'] ?? '-',
@@ -156,6 +158,7 @@ class MonitoringController extends Controller
                         }
 
                         $data_tomat[] = [
+                            'counter' => $temp_data->counter ?? '-',
                             'time' => $time,
                             'temperature' => $temp_data->temperature,
                             'humidity' => $temp_data->humidity,
@@ -163,7 +166,7 @@ class MonitoringController extends Controller
                             'statusCuaca' => $temp_data->statusCuaca ?? '-',
                             'DataPH' => $temp_data->ph ?? '-',
                             'DataSensor1' => $temp_data->DataSensor1 ?? '-',
-                            'DataTDS' => $temp_data->tds * 10 ?? '-',
+                            'DataTDS' => $temp_data->tds ?? '-',
                             'DataSensor2' => $temp_data->DataSensor2 ?? '-',
                             'dbm' => $temp_data->dbm ?? '-',
                         ];
