@@ -6,7 +6,7 @@
 @section('content-card')
     <div class="col-12">
         <div class="card">
-            <div class="card-body bg-secondary">
+            <div class="card-body">
                 <div class="text-center py-2"><h2>Penyiraman</h2></div>
                 <div class="card pt-4">
                     <div class="card-body">
@@ -30,7 +30,7 @@
                                 </form>
                             </div>
                             <div class="col-8">
-                                <div class="card bg-secondary">
+                                <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
                                             <p class="text-center">Informasi!</p>

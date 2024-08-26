@@ -44,7 +44,7 @@
                     <div class="tab-pane active p-3" id="monitoring" role="tabpanel">
                         <div id="monitoring_cabai" class="row card-cabai">
                             <div class="col-md-4">
-                                <div class="card bg-secondary">
+                                <div class="card">
                                     <div class="card-body">
                                         <div>
                                             <h4 class="mb-1 mt-1"> Kelembaban (RF) </h4>
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card bg-secondary">
+                                <div class="card">
                                     <div class="card-body">
                                     <div class="float-end mt-2">
                                         <div class="p-2 flex-grow-1 bd-highlight icon-demo-content">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card bg-secondary">
+                                <div class="card">
                                     <div class="card-body">
                                     <div class="float-end mt-2">
                                         <div class="p-2 flex-grow-1 bd-highlight icon-demo-content">
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card bg-secondary">
+                                <div class="card">
                                     <div class="card-body">
                                         <div>
                                             <h4 class="mb-1 mt-1"> Kelembaban (LoRa) </h4>
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                            <div class="card bg-secondary">
+                            <div class="card">
                                 <div class="card-body">
                                     <div class="float-end mt-2">
                                         <div class="p-2 flex-grow-1 bd-highlight icon-demo-content">
@@ -140,7 +140,7 @@
                             </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card bg-secondary">
+                            <div class="card">
                                     <div class="card-body">
                                         <div class="float-end mt-2">
                                             <div class="p-2 flex-grow-1 bd-highlight icon-demo-content">
@@ -176,7 +176,7 @@
                         </div>
                         <div id="monitoring_tomat" class="row card-tomat d-none">
                             <div class="col-md-4">
-                                <div class="card bg-secondary">
+                            <div class="card">
                                     <div class="card-body">
                                         <div class="float-end mt-2">
                                             <div class="p-2 flex-grow-1 bd-highlight icon-demo-content">
@@ -193,7 +193,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card bg-secondary">
+                            <div class="card">
                                     <div class="card-body">
                                         <div>
                                             <h4 class="mb-1 mt-1"> Kelembaban </h4>
@@ -215,7 +215,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card bg-secondary">
+                            <div class="card">
                                     <div class="card-body">
                                     <div class="float-end mt-2">
                                         <div class="p-2 flex-grow-1 bd-highlight icon-demo-content">
@@ -232,7 +232,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="card bg-secondary">
+                            <div class="card">
                                     <div class="card-body">
                                         <div class="float-end mt-2">
                                             <div class="p-2 flex-grow-1 bd-highlight icon-demo-content">
@@ -249,7 +249,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="card bg-secondary">
+                                <div class="card">
                                     <div class="card-body">
                                     <div class="float-end mt-2">
                                         <div class="p-2 flex-grow-1 bd-highlight icon-demo-content">
