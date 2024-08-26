@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 use App\Exceptions\ResponseException;
@@ -26,16 +27,16 @@ class Utils
             $response = Http::withOptions([
                 'verify' => false,
             ])->get($url)
-            ->json();
+                ->json();
 
-        $data = collect($response['values'])->map(function($item) {
-            return [
-                'quality' => $item[0],
-                'suggestion' => $item[1],
-                'percentage' => $item[2],
-            ];
+            $data = collect($response['values'])->map(function ($item) {
+                return [
+                    'quality' => $item[0],
+                    'suggestion' => $item[1],
+                    'percentage' => $item[2],
+                ];
             })->first();
-            
+
             return $data;
         } catch (\Throwable $th) {
             throw new \Exception("error_data");
@@ -48,17 +49,17 @@ class Utils
             $url = sprintf($this->ghseet_url, "Sensor_cuaca!A2:E2");
 
             $response = Http::withOptions([
-                    'verify' => false,
-                ])->get($url)
+                'verify' => false,
+            ])->get($url)
                 ->json();
 
-            $data = collect($response['values'])->map(function($item) {
+            $data = collect($response['values'])->map(function ($item) {
                 return [
                     'lux' => $item[2],
                     'temperature' => $item[3],
                     'humidity' => $item[4],
                 ];
-                })->first();
+            })->first();
 
             return $data;
         } catch (\Throwable $th) {
@@ -73,41 +74,40 @@ class Utils
             $filter = sprintf($this->filter, $start_date, $end_date);
 
             $response = Http::withHeaders([
-                    'X-M2m-Origin' => env('ANTARES_KEY'),
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json'
-                ])->withOptions([
-                    'verify' => false,
-                ])->get($uri . $filter)
+                'X-M2m-Origin' => env('ANTARES_KEY'),
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json'
+            ])->withOptions([
+                'verify' => false,
+            ])->get($uri . $filter)
                 ->json();
-            
+
             if (count($response) > 0) {
                 return $response['m2m:list'];
             }
-
         } catch (\Throwable $th) {
             //
         }
-        
+
         return [];
     }
 
-    public function postDataToDevice(string $device_name, array $payload) 
+    public function postDataToDevice(string $device_name, array $payload)
     {
         $uri = env('ANTARES_URL') . '/' . $device_name;
         $response = Http::withHeaders([
-                'X-M2m-Origin' => env('ANTARES_KEY'),
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json;ty=4',
-                'X-ANTARES-NOTIFY-MQTT' => '1',
-            ])->withOptions([
-                'verify' => false,
-            ])->post($uri, $payload);
-        
+            'X-M2m-Origin' => env('ANTARES_KEY'),
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json;ty=4',
+            'X-ANTARES-NOTIFY-MQTT' => '1',
+        ])->withOptions([
+            'verify' => false,
+        ])->post($uri, $payload);
+
         if ($response->successful() || $response->status() == 201) {
             return true;
         }
 
-        throw \Exception('gagal');
+        throw new ResponseException('gagal');
     }
 }

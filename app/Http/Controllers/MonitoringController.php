@@ -61,13 +61,11 @@ class MonitoringController extends Controller
             $end_date = $end->format('Ymd') . "T" . $end->format('His');
 
             $device_shakira = $this->helper->getDataFromDevice(Utils::APP_SHAKIRA, $start_date, $end_date);
-            // dd($device_shakira);
             $device_prama = $this->helper->getDataFromDevice(Utils::APP_PRAMA, $start_date, $end_date);
-            // dd($device_prama);
-            
             $device_smartgarden = $this->helper->getDataFromDevice(Utils::APP_001, $start_date, $end_date);
 
-            $data_shakira = collect($device_shakira)->map(function($item) {
+            $data_shakira = [];
+            foreach ($device_shakira as $item) {
                 if (isset($item['m2m:cin'])) {
                 // if (isset($item['m2m:cin'])) {
                     $temp_data = json_decode($item['m2m:cin']['con']);
@@ -77,21 +75,20 @@ class MonitoringController extends Controller
                         } catch (\Throwable $th) {
                             $time = null;
                         }
-                        return [
-                            'counter' => $temp_data->counter,
-                            'time' => $time,
-                            'humidity_soil' => $temp_data->humidity_soil,
-                            'ph_soil' => $temp_data->ph_soil,
-                            'lux' => $temp_data->lux,
-                            'status_alert' => $temp_data->status_alert ?? null,
+                        $data_shakira[] = [
+                            'time' => $time ?? '-',
+                            'counter' => $temp_data->counter ?? '-',
+                            'humidity_soil' => $temp_data->humidity_soil ?? '-',
+                            'ph_soil' => $temp_data->ph_soil ?? '-',
+                            'lux' => $temp_data->lux ?? '-',
+                            'status_alert' => $temp_data->status_alert ?? '-',
                         ];
                     }
                 }
-            })->filter();
-            
-            $data_prama = collect($device_prama)->map(function($item) {
+            }
+            $data_prama = [];
+            foreach ($device_prama as $item) {
                 if (isset($item['m2m:cin'])) {
-                // if (isset($item['m2m:cin'])) {
                     $temp_data = json_decode($item['m2m:cin']['con']);
                     $dt = $item['m2m:cin']['ct'];
                     if (isset($temp_data->counter)) {
@@ -100,49 +97,16 @@ class MonitoringController extends Controller
                         } catch (\Throwable $th) {
                             $time = null;
                         }
-                        return [
-                            'counter' => $temp_data->counter,
-                            'time' => $time,
-                            'humidity_soil_lora' => $temp_data->humidity_soil,
-                            'status_valve' => $temp_data->status_valve,
-                            'rssi' => $temp_data->rssi,
-                            'snr' => $temp_data->snr ?? null,
-                            'automatic' => $temp_data->automatic ?? null,
+                        $data_prama[] = [
+                            'time' => $time ?? '-',
+                            'counter' => $temp_data->counter ?? '-',
+                            'humidity_soil_lora' => $temp_data->humidity_soil ?? '-',
+                            'status_valve' => $temp_data->status_valve ?? '-',
+                            'rssi' => $temp_data->rssi ?? '-',
+                            'snr' => $temp_data->snr ?? '-',
+                            'automatic' => $temp_data->automatic ?? '-',
                         ];
                     }
-                }
-            })->filter();
-
-            $data_cabai = [];
-            if($data_shakira->count() > 0) {
-                foreach ($data_shakira as $item) {
-                    $data_first = $data_prama->where('time', '<=', $item['time'])->first();
-                    $data_cabai[] = [
-                        'counter' => $item['counter'] ?? '-',
-                        'time' => $item['time'] ?? '-',
-                        'humidity_soil' => $item['humidity_soil'] ?? '-',
-                        'humidity_soil_lora' => $data_first['humidity_soil_lora'] ?? '-',
-                        'ph_soil' => $item['ph_soil'] ?? '-',
-                        'lux' => $item['lux'] ?? '-',
-                        'status_valve' => $data_first['status_valve'] ?? '-',
-                        'rssi' => $data_first['rssi'] ?? '-',
-                        'dbm' => $item['dbm'] ?? '-',
-                    ];
-                }
-            } elseif($data_prama->count() > 0) {
-                foreach ($data_prama as $item) {
-                    $data_first = $data_shakira->where('time', '<=', $item['time'])->first();
-                    $data_cabai[] = [
-                        'counter' => $item['counter'] ?? '-',
-                        'time' => $item['time'] ?? '-',
-                        'humidity_soil' => $data_first['humidity_soil'] ?? '-',
-                        'humidity_soil_lora' => $item['humidity_soil_lora'] ?? '-',
-                        'ph_soil' => $data_first['ph_soil'] ?? '-',
-                        'lux' => $data_first['lux'] ?? '-',
-                        'status_valve' => $item['status_valve'] ?? '-',
-                        'rssi' => $item['rssi'] ?? '-',
-                        'dbm' => $item['dbm'] ?? '-',
-                    ];
                 }
             }
             
@@ -175,11 +139,14 @@ class MonitoringController extends Controller
             }
 
             $data_tomat = collect($data_tomat)->sortByDesc('time')->all();
-            $data_cabai = collect($data_cabai)->sortByDesc('time')->all();
+            $data_prama = collect($data_prama)->sortByDesc('time')->all();
+            $data_shakira = collect($data_shakira)->sortByDesc('time')->all();
             $results = [
                 'cabai' => [
-                    'card' => $data_cabai[0] ?? [],
-                    'collection' => $data_cabai,
+                    'card_shakira' => $data_shakira[0] ?? [],
+                    'card_prama' => $data_prama[0] ?? [],
+                    'collection_prama' => $data_prama,
+                    'collection_shakira' => $data_shakira,
                 ],
                 'tomat' => [
                     'card' => $data_tomat[0] ?? [],

@@ -269,15 +269,25 @@
                     </div>
                     <div class="tab-pane p-3" id="history" role="tabpanel">
                         <div id="history_cabai" class="card-cabai">
-                            <table id="datatable_cabai" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <table id="dt_shakira" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>Time</th>
                                         <th>Counter</th>
                                         <th>Kelembaban RF</th>
-                                        <th>Kelembaban LoRa</th>
                                         <th>pH</th>
                                         <th>Intensitas Cahaya</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <table id="dt_prama" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Counter</th>
+                                        <th>Kelembaban LoRa</th>
                                         <th>Valve</th>
                                         <th>Dbm</th>
                                     </tr>
@@ -318,7 +328,7 @@
 
     <script>
         $(document).ready(function() {
-            let grid_cabai = $('#datatable_cabai').dataTable({
+            let grid_shakira = $('#dt_shakira').dataTable({
                 columns: [
                     {
                         data: 'time',
@@ -333,16 +343,28 @@
                         name: 'humidity_soil',
                     },
                     {
-                        data: 'humidity_soil_lora',
-                        name: 'humidity_soil_lora',
-                    },
-                    {
                         data: 'ph_soil',
                         name: 'ph_soil',
                     },
                     {
                         data: 'lux',
                         name: 'lux',
+                    },
+                ]
+            });
+            let grid_prama = $('#dt_prama').dataTable({
+                columns: [
+                    {
+                        data: 'time',
+                        name: 'time',
+                    },
+                    {
+                        data: 'counter',
+                        name: 'counter',
+                    },
+                    {
+                        data: 'humidity_soil_lora',
+                        name: 'humidity_soil_lora',
                     },
                     {
                         data: 'status_valve',
@@ -426,19 +448,20 @@
                     method: "GET",
                     success: function(item) {
                         mapCardTomat(item.tomat.card)
-                        mapCardCabai(item.cabai.card)
+                        mapCardCabai(item.cabai.card_shakira, item.cabai.card_prama)
                         refreshTomatTable(item.tomat.collection)
-                        refreshCabaiTable(item.cabai.collection)
+                        refreshCabaiTable(item.cabai.collection_shakira, item.cabai.collection_prama)
                     },
                     error: function(err) {
                         refreshTomatTable([])
-                        refreshCabaiTable([])
+                        refreshCabaiTable([], [])
                     }
                 });
             }
 
-            function refreshCabaiTable(data_cabai) {
-                $('#datatable_cabai').DataTable().clear().rows.add(data_cabai).draw();
+            function refreshCabaiTable(data_shakira, data_prama) {
+                $('#dt_shakira').DataTable().clear().rows.add(data_shakira).draw();
+                $('#dt_prama').DataTable().clear().rows.add(data_prama).draw();
             }
 
             function refreshTomatTable(data_tomat) {
@@ -465,16 +488,16 @@
                 }
             }
 
-            function mapCardCabai(cards) {
+            function mapCardCabai(cards, card_prama) {
                 if (cards != null) {
                     $('#cabai_humidity_soil').html(cards.humidity_soil)
                     $('#cabai_lux').html(cards.lux)
                     $('#cabai_ph_soil').html(cards.ph_soil)
-                    $('#cabai_rssi').html(cards.rssi + " dbm")
-                    $('#cabai_status_valve').html(cards.status_valve ? 'Aktif' : 'Tidak Aktif')
+                    $('#cabai_rssi').html(card_prama.rssi + " dbm")
+                    $('#cabai_status_valve').html(card_prama.status_valve ? 'Aktif' : 'Tidak Aktif')
                     $('#cabai_ph_soil').html(cards.ph_soil)
-                    $('#cabai_lora').html(cards.humidity_soil_lora)
-                    $('.cabai_lora_progress').css('width', cards.humidity_soil_lora + '%')
+                    $('#cabai_lora').html(card_prama.humidity_soil_lora)
+                    $('.cabai_lora_progress').css('width', card_prama.humidity_soil_lora + '%')
                     $('.cabai_humidity_soil_progress').css('width', cards.humidity_soil + '%')
 
                     if (cards.ph_soil < 6) {
