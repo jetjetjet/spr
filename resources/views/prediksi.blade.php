@@ -63,7 +63,7 @@
                                             <td id="quality" style="font-weight: normal;">: -</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-weight: bolder;">Analisa Identifikasi </td>
+                                            <td style="font-weight: bolder;">Saran </td>
                                             <td id="suggestion" style="font-weight: normal;">
                                                 <p>
                                                     : -

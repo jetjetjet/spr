@@ -36,6 +36,7 @@
                                             <p class="text-center">Informasi!</p>
                                             <ol>
                                                 <li>Selalu klik send data apabila ada perubahan</li>
+                                                <li>Lakukan Send Data kembali apabila perangkat mati</li>
                                                 <li>Hanya bisa mengaktifkan salah satu</li>
                                             </ol>
                                         </h5>
